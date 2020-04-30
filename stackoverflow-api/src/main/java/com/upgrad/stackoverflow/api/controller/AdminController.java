@@ -1,9 +1,16 @@
 package com.upgrad.stackoverflow.api.controller;
 
+import com.upgrad.stackoverflow.api.model.UserDeleteResponse;
 import com.upgrad.stackoverflow.service.business.AdminBusinessService;
+import com.upgrad.stackoverflow.service.entity.UserEntity;
+import com.upgrad.stackoverflow.service.exception.AuthorizationFailedException;
+import com.upgrad.stackoverflow.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -20,4 +27,12 @@ public class AdminController {
      * @throws UserNotFoundException
      */
 
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<UserDeleteResponse> deleteUser(@PathVariable("userId") String userId, @RequestHeader(value = "Authorization") String authorization) throws AuthorizationFailedException, UserNotFoundException {
+        UserEntity userEntity = adminBusinessService.deleteUser(authorization, userId);
+        UserDeleteResponse userDeleteResponse = new UserDeleteResponse();
+        userDeleteResponse.setId(userEntity.getUuid());
+        userDeleteResponse.setStatus("USER SUCCESSFULLY DELETED");
+        return new ResponseEntity<UserDeleteResponse>(userDeleteResponse, HttpStatus.OK);
+    }
 }
