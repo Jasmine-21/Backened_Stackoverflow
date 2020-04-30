@@ -1,0 +1,21 @@
+server:
+  servlet:
+    port: 8080
+    contextPath: /api
+
+spring:
+  application:
+    name: stackoverflow-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stackoverflow
+    username: postgres
+    password: postgres@123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          user_jdbc_metadata_default: false
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
