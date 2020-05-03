@@ -42,6 +42,7 @@ public class QuestionController {
         questionResponse.setId(question.getUuid());
         questionResponse.setStatus("QUESTION CREATED");
         return new ResponseEntity<QuestionResponse>(questionResponse, HttpStatus.CREATED);
+    
     }
     /**
      * A controller method to fetch all the questions from the database.
@@ -102,7 +103,9 @@ public class QuestionController {
     public ResponseEntity<QuestionDeleteResponse> deleteQuestion(@PathVariable String questionId, @RequestHeader("authorization") String authorization) throws AuthorizationFailedException,InvalidQuestionException{
 
         QuestionEntity questionEntity = questionBusinessService.deleteQuestion(questionId,authorization);
+
         QuestionDeleteResponse questionDeletingResponse = new QuestionDeleteResponse().id(questionEntity.getUuid()).status("QUESTION DELETED");
+
         return new ResponseEntity<QuestionDeleteResponse>(questionDeletingResponse,HttpStatus.OK);
     }
 
