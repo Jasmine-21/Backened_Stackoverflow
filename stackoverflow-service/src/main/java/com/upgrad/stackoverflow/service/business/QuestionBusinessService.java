@@ -71,7 +71,9 @@ public class QuestionBusinessService {
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         } else if (userAuthEntity.getLogoutAt() != null) {
-            throw new AuthorizationFailedException("ATHR-002", "User has signed out. Sign in first to edit the question");
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out. Sign in first to edit the question");
+
+            
         } else {
             QuestionEntity questionEntityyy = this.questionDao.getQuestionByUuid(questionId);
             if (questionEntityyy == null) {
@@ -97,7 +99,9 @@ public class QuestionBusinessService {
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         } else if (userAuthEntity.getLogoutAt() != null) {
-            throw new AuthorizationFailedException("ATHR-002", "User has signed out. Sign in first to delete a question");
+
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out. Sign in first to delete a question");
+
         } else {
             QuestionEntity questionEntity = this.questionDao.getQuestionByUuid(questionId);
             if (questionEntity == null) {

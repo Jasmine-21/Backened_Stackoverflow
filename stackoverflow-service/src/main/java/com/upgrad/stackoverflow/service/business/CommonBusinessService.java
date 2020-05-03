@@ -29,7 +29,7 @@ public class CommonBusinessService {
         }
         else if (userAuthEntity.getLogoutAt() != null)
         {
-            throw new AuthorizationFailedException("ATHR-002", "User has signed out. Sign in first to get user details");
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
         }
         else
         {

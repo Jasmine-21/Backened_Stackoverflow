@@ -53,7 +53,7 @@ public class UserController {
         userEntity.setDob(signupUserRequest.getDob());
         userEntity.setContactNumber(signupUserRequest.getContactNumber());
         final UserEntity createdUserEntity = userBusinessService.signup(userEntity);
-        SignupUserResponse userResponse = new SignupUserResponse().id(createdUserEntity.getUuid()).status("REGISTERED");
+        SignupUserResponse userResponse = new SignupUserResponse().id(createdUserEntity.getUuid()).status("USER SUCCESSFULLY REGISTERED");
         return new ResponseEntity<SignupUserResponse>(userResponse,HttpStatus.CREATED);
     }
 
@@ -72,7 +72,7 @@ public class UserController {
         String[] decodeArray = decodeText.split(":");
         UserAuthEntity userAuthtoken = userBusinessService.authenticate(decodeArray[0],decodeArray[1]);
         UserEntity user = userAuthtoken.getUser();
-        SigninResponse signinResponse = new SigninResponse().id(user.getUuid()).message("Signed In Successfully");
+        SigninResponse signinResponse = new SigninResponse().id(user.getUuid()).message("SIGNED IN SUCCESSFULLY");
         HttpHeaders header= new HttpHeaders();
         header.add("access-token", userAuthtoken.getAccessToken());
         return new ResponseEntity<SigninResponse>(signinResponse, header,HttpStatus.OK);
@@ -90,7 +90,7 @@ public class UserController {
     public ResponseEntity<SignoutResponse> signout(@RequestHeader("authorization") final String authorization) throws SignOutRestrictedException{
         UserAuthEntity userAuthEntity = userBusinessService.signout(authorization);
         UserEntity user = userAuthEntity.getUser();
-        SignoutResponse signoutResponse = new SignoutResponse().id(user.getUuid()).message("Signed Out Successfully");
+        SignoutResponse signoutResponse = new SignoutResponse().id(user.getUuid()).message("SIGNED OUT SUCCESSFULLY");
         return new ResponseEntity<SignoutResponse>(signoutResponse,HttpStatus.OK);
 
     }

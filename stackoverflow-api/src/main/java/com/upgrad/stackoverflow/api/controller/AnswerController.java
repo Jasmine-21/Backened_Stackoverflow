@@ -49,7 +49,7 @@ public class AnswerController {
         QuestionEntity questionEntity = answerBusinessService.getQuestionByUuid(questionId);
         answerEntity.setQuestion(questionEntity);
         AnswerEntity answerEntity1 = answerBusinessService.createAnswer(answerEntity,authorization);
-        AnswerResponse answerResponse = new AnswerResponse().id(answerEntity1.getUuid()).status("Answer Created");
+        AnswerResponse answerResponse = new AnswerResponse().id(answerEntity1.getUuid()).status("ANSWER CREATED");
         return new ResponseEntity<AnswerResponse>(answerResponse, HttpStatus.CREATED);
     }
     /**
@@ -68,7 +68,7 @@ public class AnswerController {
         AnswerEntity answerEntity=new AnswerEntity();
         answerEntity.setAns(answerEditRequest.getContent());
         AnswerEntity answerEntity1 = answerBusinessService.editAnswerContent(answerEntity,  answerId,  authorization);
-        AnswerEditResponse answerEditResponse =new AnswerEditResponse().id(answerEntity1.getUuid()).status("Answer Edited");
+        AnswerEditResponse answerEditResponse =new AnswerEditResponse().id(answerEntity1.getUuid()).status("ANSWER EDITED");
         return new ResponseEntity<AnswerEditResponse>(answerEditResponse, HttpStatus.OK);
     }
     /**
@@ -84,7 +84,7 @@ public class AnswerController {
     public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@PathVariable String answerId, @RequestHeader("authorization") String authorization) throws AuthorizationFailedException, AnswerNotFoundException
     {
         AnswerEntity answerEntity = answerBusinessService.deleteAnswer(answerId, authorization);
-        AnswerDeleteResponse answerDeleteResponse = new AnswerDeleteResponse().id(answerEntity.getUuid()).status("Answer Deleted");
+        AnswerDeleteResponse answerDeleteResponse = new AnswerDeleteResponse().id(answerEntity.getUuid()).status("ANSWER DELETED");
         return new ResponseEntity<AnswerDeleteResponse>(answerDeleteResponse,HttpStatus.OK);
     }
 
