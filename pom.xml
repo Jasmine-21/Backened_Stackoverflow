@@ -17,8 +17,9 @@
     </parent>
 
     <modules>
-        <module>stackoverflow-api</module>
+       
         <module>stackoverflow-db</module>
         <module>stackoverflow-service</module>
+              <module>stackoverflow-api</module>
     </modules>
 </project>
